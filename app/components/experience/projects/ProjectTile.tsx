@@ -102,7 +102,6 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
         <mesh>
           <planeGeometry args={[4.2, 2, 1]} />
           <meshBasicMaterial color="#FFF" transparent opacity={0.3}/>
-          {/* <meshPhysicalMaterial transmission={1} roughness={0.3} /> */}
           <Edges color="black" lineWidth={1.5} />
         </mesh>
         <Text
@@ -111,7 +110,7 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
           anchorX="left"
           anchorY="bottom"
           maxWidth={4}
-          fontSize={0.8}>
+          fontSize={project.title.length > 20 ? 0.45 : 0.8}>
           {project.title}
         </Text>
         <group position={[-1.25, 1.4, 0.01]}>

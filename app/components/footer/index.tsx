@@ -12,7 +12,18 @@ const FooterLinkItem = ({ link }: { link: FooterLink }) => {
   const [hovered, setHovered] = useState(false);
   const onPointerOver = () => setHovered(true);
   const onPointerOut = () => setHovered(false);
-  const onClick = () => window.open(link.url, '_blank');
+  const onClick = () => {
+    if (link.url.endsWith('.pdf')) {
+      const a = document.createElement('a');
+      a.href = link.url;
+      a.download = link.url.split('/').pop() || 'download.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      window.open(link.url, '_blank');
+    }
+  };
   const onPointerMove = (e: MouseEvent) => {
     if (isMobile) return;
     const hoverDiv = document.getElementById(`footer-link-${link.name}`);

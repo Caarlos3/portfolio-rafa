@@ -11,6 +11,6 @@ export const FOOTER_LINKS: FooterLink[] = [
     name: 'Resume',
     hoverText: 'Download CV',
     icon: 'icons/file.svg',
-    url: './CV_Rafael_Ortiz_Larios.pdf',
+    url: './Lebenslauf. Rf.pdf',
   }
 ];

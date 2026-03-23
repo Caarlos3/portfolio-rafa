@@ -3,14 +3,14 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { usePortalStore } from "@stores";
 import gsap from "gsap";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import * as THREE from "three";
 
 import { WORK_TIMELINE } from "@constants";
 import { WorkTimelinePoint } from "@types";
 
-const reusableLeft = new THREE.Vector3(-0.3, 0, -0.1);
-const reusableRight = new THREE.Vector3(0.3, 0, -0.1);
+const reusableLeft = new THREE.Vector3(-0.4, 0, -0.1);
+const reusableRight = new THREE.Vector3(0.4, 0, -0.1);
 
 const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number }) => {
   const getPoint = useMemo(() => {
@@ -25,7 +25,7 @@ const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number
 
   const textProps: Partial<TextProps> = useMemo(() => ({
     font: "./Vercetti-Regular.woff",
-    color: "white",
+    color: "#8a8d91",
     anchorX: textAlign,
     fillOpacity: 2 - 2 * diff,
   }), [textAlign, diff]);
@@ -33,26 +33,39 @@ const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number
   const titleProps = useMemo(() => ({
     ...textProps,
     font: "./soria-font.ttf",
-    fontSize: 0.6,
-    maxWidth: 3,
+    fontSize: 0.45,
+    maxWidth: 12,
   }), [textProps]);
 
+  const [scale, setScale] = useState(isTablet ? 0.45 : isMobile ? 0.35 : 0.6);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) setScale(0.3);
+      else if (window.innerWidth < 1024) setScale(0.45);
+      else setScale(0.6);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <group position={point.point} scale={isMobile ? 0.35 : 0.6}>
+    <group position={point.point} scale={scale}>
       <Box args={[0.2, 0.2, 0.2]} position={[0, 0, -0.1]} scale={[1 - diff, 1 - diff, 1 - diff]}>
-        <meshBasicMaterial color="white" wireframe />
-        <Edges color="white" lineWidth={1.5} />
+        <meshBasicMaterial color="#8a8d91" wireframe />
+        <Edges color="#8a8d91" lineWidth={1.5} />
       </Box>
       <group>
         <group position={getPoint}>
-          <Text {...textProps} fontSize={0.3} position={[-diff / 2, 0, 0]}>
+          <Text {...textProps} fontSize={0.25} position={[-diff / 2, 0.8, 0]}>
             {point.year}
           </Text>
-          <group position={[0, -0.5, 0]}>
-            <Text {...titleProps} fontSize={0.6} maxWidth={3} position={[0, -diff / 2, 0]}>
+          <group position={[0, -0.2, 0]}>
+            <Text {...titleProps} position={[0, -diff / 2, 0]}>
               {point.title}
             </Text>
-            <Text {...textProps} fontSize={0.2} position={[0, -0.4 - diff, 0]}>
+            <Text {...textProps} fontSize={0.18} position={[0, -0.8 - diff, 0]}>
               {point.subtitle}
             </Text>
           </group>
