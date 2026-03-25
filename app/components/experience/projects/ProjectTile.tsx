@@ -39,25 +39,24 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
     if (!projectRef.current) return;
     hoverAnimRef.current?.kill();
 
-    const [mesh, title, dateGroup, textBox, button] = projectRef.current.children;
+    const [mesh, title, dateGroup, tasksGroup, button] = projectRef.current.children;
 
     hoverAnimRef.current = gsap.timeline();
     hoverAnimRef.current
       .to(projectRef.current.position, { z: hovered ? 1 : 0, duration: 0.2 }, 0)
-      .to(projectRef.current.position, { y: hovered ? 0.4 : 0 }, 0)
+      .to(projectRef.current.position, { y: hovered ? 1.5 : 0 }, 0)
       .to(projectRef.current.scale, {
-        x: hovered ? 1.3 : 1,
-        y: hovered ? 1.3 : 1,
-        z: hovered ? 1.3 : 1,
+        x: hovered ? 1.5 : 1,
+        y: hovered ? 1.5 : 1,
+        z: hovered ? 1.5 : 1,
       }, 0)
-      .to(title.position, { y: hovered ? 0.7 : -0.8 }, 0)
-      .to(textBox.position, { y: hovered ? 0.7 : 0 }, 0)
-      // .to(textBox.scale, { y: hovered ? 1 : 0, x: hovered ? 1 : 0 }, 0)
-      .to(textBox, { fillOpacity: hovered ? 1 : 0, duration: 0.4 }, 0)
-      .to(dateGroup.position, { y: hovered ? 2.6 : 1.4 }, 0)
-      .to(mesh.scale, { y: hovered ? 2 : 1 }, 0)
+      .to(title.position, { y: hovered ? 3.0 : -0.8 }, 0)
+      .to(tasksGroup.position, { y: hovered ? 1.0 : -0.6 }, 0)
+      .to(tasksGroup.children, { fillOpacity: hovered ? 1 : 0, duration: 0.4, stagger: 0.05 }, 0)
+      .to(dateGroup.position, { y: hovered ? 5.4 : 1.4 }, 0)
+      .to(mesh.scale, { y: hovered ? 3.8 : 1 }, 0)
       .to((mesh as THREE.Mesh).material, { opacity: hovered ? 0.95 : 0.3 }, 0)
-      .to(mesh.position, { y: hovered ? 1 : 0 }, 0);
+      .to(mesh.position, { y: hovered ? 2.0 : 0 }, 0);
 
     if (project.url) {
       hoverAnimRef.current
@@ -101,7 +100,7 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
       <group ref={projectRef}>
         <mesh>
           <planeGeometry args={[4.2, 2, 1]} />
-          <meshBasicMaterial color="#FFF" transparent opacity={0.3}/>
+          <meshBasicMaterial color="#FFF" transparent opacity={0.3} />
           <Edges color="black" lineWidth={1.5} />
         </mesh>
         <Text
@@ -126,14 +125,26 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
             {project.date.toUpperCase()}
           </Text>
         </group>
-        <Text
-          {...subtitleProps}
-          maxWidth={3.8}
-          position={[-1.9, 2.3, 0.1]}
-          // scale={[0, 0, 1]}
-          fontSize={0.2}>
-          {project.subtext}
-        </Text>
+        <group position={[-1.9, -0.6, 0.1]}>
+          <Text
+            {...subtitleProps}
+            maxWidth={4.0}
+            position={[0, hovered ? 1.5 : 2.9, 0]}
+            fontSize={0.20}
+            color="#333">
+            {project.subtext}
+          </Text>
+          {project.tasks && project.tasks.map((task, i) => (
+            <Text
+              key={i}
+              {...subtitleProps}
+              maxWidth={4.0}
+              position={[0, hovered ? 0.8 - (i * 0.75) : 3, 0]}
+              fontSize={0.13}>
+              • {task}
+            </Text>
+          ))}
+        </group>
         {project.url && (
           <group
             position={[1.3, -0.6, -1]}

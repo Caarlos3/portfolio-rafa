@@ -13,8 +13,8 @@ const TextWindow = () => {
     const c = data.range(0.65, 0.15);
 
     if (windowRef.current) {
-      windowRef.current.setRotationFromAxisAngle(new THREE.Vector3(0, -1, 0), 0.5 *Math.PI * c);
-      windowRef.current.position.x =  -0.6 * c;
+      windowRef.current.setRotationFromAxisAngle(new THREE.Vector3(0, -1, 0), 0.5 * Math.PI * c);
+      windowRef.current.position.x = -0.6 * c;
       windowRef.current.position.z = -0.6 * c;
     }
   });
@@ -31,7 +31,7 @@ const TextWindow = () => {
         position={[0.12, 0, 0]}
         {...fontProps}
         scale={[1, -1, 1]}
-        rotation={[0, 0,  -Math.PI / 2]}>
+        rotation={[0, 0, -Math.PI / 2]}>
         PROFESSOR
       </Text>
 
@@ -40,7 +40,7 @@ const TextWindow = () => {
         scale={[-1, -1, 1]}
         fontSize={1.3}
         position={[0.12, 0, -1.4]}
-        rotation={[0, 0,  -Math.PI / 2]}>
+        rotation={[0, 0, -Math.PI / 2]}>
         LITERATURE
       </Text>
 
@@ -49,7 +49,7 @@ const TextWindow = () => {
           {...fontProps}
           scale={[1, -1, 1]}
           fontSize={0.8}
-          rotation={[0, -Math.PI / 2,  -Math.PI / 2]}>
+          rotation={[0, -Math.PI / 2, -Math.PI / 2]}>
           PHILOSOPHY
         </Text>
 
@@ -58,7 +58,7 @@ const TextWindow = () => {
           scale={[1, -1, 1]}
           fontSize={0.8}
           position={[0, 0, -0.6]}
-          rotation={[0, -Math.PI / 2,  -Math.PI / 2]}>
+          rotation={[0, -Math.PI / 2, -Math.PI / 2]}>
           PHILOLOGY
         </Text>
       </group>
@@ -68,7 +68,7 @@ const TextWindow = () => {
           {...fontProps}
           scale={[-1, -1, 1]}
           fontSize={0.8}
-          rotation={[0, -Math.PI / 2,  -Math.PI / 2]}>
+          rotation={[0, -Math.PI / 2, -Math.PI / 2]}>
           EMOTIONAL
         </Text>
         <Text color="white" anchorX="right" anchorY="middle"
@@ -76,8 +76,8 @@ const TextWindow = () => {
           scale={[-1, -1, 1]}
           fontSize={0.8}
           position={[0, 0, -0.6]}
-          rotation={[0, -Math.PI / 2,  -Math.PI / 2]}>
-          PROFESSOR
+          rotation={[0, -Math.PI / 2, -Math.PI / 2]}>
+          PHILOSOPHY
         </Text>
       </group>
     </group>
