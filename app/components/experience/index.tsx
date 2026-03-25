@@ -2,7 +2,7 @@ import { Text, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { usePortalStore } from "@stores";
 import { useRef } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import * as THREE from 'three';
 import GridTile from "./GridTile";
 import Projects from "./projects";
@@ -42,11 +42,17 @@ const Experience = () => {
   const getTitle = () => {
     const title = 'experience'.toUpperCase();
     return title.split('').map((char, i) => {
-      const diff = isMobile ? 0.4 : 0.8;
+      const diff = isMobile ? 0.35 : isTablet ? 0.6 : 0.8;
       return (
         <Text key={i} {...fontProps} position={[i * diff, 2, 1]}>{char}</Text>
       );
     });
+  };
+
+  const getTitleX = () => {
+    const totalChars = 'experience'.length;
+    const spacing = isMobile ? 0.35 : isTablet ? 0.6 : 0.8;
+    return -(totalChars * spacing) / 2;
   };
 
   return (
@@ -56,7 +62,7 @@ const Experience = () => {
         <shadowMaterial opacity={0.1} />
       </mesh> */}
       <group rotation={[0, 0, Math.PI / 2]}>
-        <group ref={titleRef} position={[isMobile ? -1.8 : -3.6, 2, -2]}>
+        <group ref={titleRef} position={[getTitleX(), 2, -2]}>
           {getTitle()}
         </group>
 
@@ -65,14 +71,14 @@ const Experience = () => {
             id="work"
             color='#b9c6d6'
             textAlign='left'
-            position={new THREE.Vector3(isMobile ? -1 : -2, 0, isMobile ? 0.4 : 0)}>
+            position={new THREE.Vector3(isMobile ? -1 : isTablet ? -1.5 : -2, 0, isMobile ? 0.4 : 0)}>
             <Work />
           </GridTile>
           <GridTile title='WORK EXPERIENCE'
             id="projects"
             color='#bdd1e3'
             textAlign='right'
-            position={new THREE.Vector3(isMobile ? 1 : 2, 0, 0)}>
+            position={new THREE.Vector3(isMobile ? 1 : isTablet ? 1.5 : 2, 0, 0)}>
             <Projects />
           </GridTile>
         </group>

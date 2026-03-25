@@ -5,7 +5,7 @@ export const FOOTER_LINKS: FooterLink[] = [
     name: 'LinkedIn',
     hoverText: 'Connect with me',
     icon: 'icons/linkedin.svg',
-    url: '[Pega aquí tu URL de LinkedIn]',
+    url: 'https://www.linkedin.com/in/rafael-ortiz-larios-a83947398',
   },
   {
     name: 'Resume',

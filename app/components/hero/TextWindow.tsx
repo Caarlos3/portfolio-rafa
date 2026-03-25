@@ -3,6 +3,7 @@
 import { Text, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import { isMobile } from "react-device-detect";
 import * as THREE from "three";
 
 const TextWindow = () => {
@@ -23,8 +24,10 @@ const TextWindow = () => {
     font: "./soria-font.ttf",
   };
 
+  const scale = isMobile ? 0.6 : 1;
+
   return (
-    <group position={[0, -0.3, 0]} ref={windowRef}>
+    <group position={[0, -0.3, 0]} ref={windowRef} scale={scale}>
 
       <Text color="white" anchorX="left" anchorY="middle"
         fontSize={1.3}
@@ -77,7 +80,7 @@ const TextWindow = () => {
           fontSize={0.8}
           position={[0, 0, -0.6]}
           rotation={[0, -Math.PI / 2, -Math.PI / 2]}>
-          PHILOSOPHY
+          PROFESSOR
         </Text>
       </group>
     </group>

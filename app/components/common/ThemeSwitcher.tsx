@@ -5,7 +5,7 @@ import { usePortalStore, useThemeStore } from "@stores";
 import gsap from "gsap";
 import Image from 'next/image';
 import { useEffect, useRef, useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 
 const ThemeSwitcher = () => {
   const themeSwitcherRef = useRef<HTMLDivElement>(null);
@@ -23,8 +23,8 @@ const ThemeSwitcher = () => {
   }, [isActive]);
 
   useEffect(() => {
-    setPositionClass(isMobile ? 'top-2 right-2' : 'top-6 right-6');
-  }, [isMobile]);
+    setPositionClass(isMobile ? 'top-4 right-4' : isTablet ? 'top-5 right-5' : 'top-6 right-6');
+  }, [isMobile, isTablet]);
 
   useEffect(() => {
     const metaThemeColor = document.querySelector('meta[name="theme-color"]')

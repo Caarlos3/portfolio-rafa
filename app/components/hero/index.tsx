@@ -5,6 +5,7 @@ import { Text } from "@react-three/drei";
 import { useProgress } from "@react-three/drei";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import { isMobile, isTablet } from "react-device-detect";
 import * as THREE from "three";
 import CloudContainer from "../models/Cloud";
 import StarsContainer from "../models/Stars";
@@ -30,18 +31,20 @@ const Hero = () => {
 
   const fontProps = {
     font: "./soria-font.ttf",
-    fontSize: 1.2,
+    fontSize: isMobile ? 0.6 : 1.2,
+    maxWidth: isMobile ? 3 : 10,
+    textAlign: 'center' as const,
   };
 
   return (
     <>
-      <Text position={[0, 2, -10]} {...fontProps} ref={titleRef}>Hi, I am Rafael Ortiz Larios.</Text>
+      <Text position={[0, isMobile ? 3 : 2, -10]} {...fontProps} ref={titleRef}>Hi, I am Rafael Ortiz Larios.</Text>
       <StarsContainer />
-      <CloudContainer/>
-      <group position={[0, -25, 5.69]}>
-        <pointLight castShadow position={[1, 1, -2.5]} intensity={60} distance={10}/>
-        <WindowModel receiveShadow/>
-        <TextWindow/>
+      <CloudContainer />
+      <group position={[0, isMobile ? -23 : -25, 5.69]} scale={isMobile ? 0.8 : isTablet ? 0.9 : 1}>
+        <pointLight castShadow position={[1, 1, -2.5]} intensity={60} distance={10} />
+        <WindowModel receiveShadow />
+        <TextWindow />
       </group>
     </>
   );

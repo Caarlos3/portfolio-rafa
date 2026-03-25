@@ -5,7 +5,7 @@ import { AdaptiveDpr, Preload, ScrollControls, useProgress } from "@react-three/
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 
 import { useThemeStore } from "@stores";
 
@@ -32,14 +32,15 @@ const CanvasLoader = (props: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!isMobile) {
+      const margin = isTablet ? '0.5rem' : '1rem';
       const borderStyle = {
-        inset: '1rem',
-        width: 'calc(100% - 2rem)',
-        height: 'calc(100% - 2rem)',
+        inset: margin,
+        width: `calc(100% - (${margin} * 2))`,
+        height: `calc(100% - (${margin} * 2))`,
       };
       setCanvasStyle({ ...canvasStyle, ...borderStyle})
     }
-  }, [isMobile]);
+  }, [isMobile, isTablet]);
 
   useGSAP(() => {
     if (progress === 100) {
