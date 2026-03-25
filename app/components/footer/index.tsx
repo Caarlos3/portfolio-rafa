@@ -13,7 +13,9 @@ const FooterLinkItem = ({ link }: { link: FooterLink }) => {
   const onPointerOver = () => setHovered(true);
   const onPointerOut = () => setHovered(false);
   const onClick = () => {
-    if (link.url.endsWith('.pdf')) {
+    if (link.url.startsWith('mailto:')) {
+      window.location.href = link.url;
+    } else if (link.url.endsWith('.pdf')) {
       const a = document.createElement('a');
       a.href = link.url;
       a.download = link.url.split('/').pop() || 'download.pdf';

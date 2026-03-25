@@ -12,5 +12,11 @@ export const FOOTER_LINKS: FooterLink[] = [
     hoverText: 'Download CV',
     icon: 'icons/file.svg',
     url: './Lebenslauf. Rf.pdf',
+  },
+  {
+    name: 'Contact',
+    hoverText: 'mail contact',
+    icon: 'icons/mail.svg',
+    url: 'mailto:info@ortizadvisory.ch',
   }
 ];
