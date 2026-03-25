@@ -15,8 +15,8 @@ const vercettiFont = localFont({
 
 export const metadata: Metadata = {
   title: "Rafael Ortiz Larios ✌️",
-  description: "A frontend developer by profession, a creative at heart.",
-  keywords: "Rafael Ortiz Larios, Frontend Engineer, React Developer, Three.js, Creative Developer, Web Development, Angular, JavaScript, TypeScript, Portfolio",
+  description: "Philosopher",
+  keywords: "Rafael Ortiz Larios",
   authors: [{ name: "Rafael Ortiz Larios" }],
   creator: "Rafael Ortiz Larios",
   publisher: "Rafael Ortiz Larios",
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Rafael Ortiz Larios - Frontend Engineer",
-    description: "Frontend engineer by profession, creative at heart.",
+    title: "Rafael Ortiz Larios ",
+    description: "Philosopher",
     url: "https://rafaelortizlarios.github.io",
     siteName: "Rafael Ortiz Larios's Portfolio",
     locale: "es_ES",
@@ -72,7 +72,7 @@ export default function RootLayout({
       >
         {children}
       </body>
-      <GoogleAnalytics gaId={'G-7WD4HM3XRE'}/>
+      <GoogleAnalytics gaId={'G-7WD4HM3XRE'} />
     </html>
   );
 }
