@@ -14,7 +14,7 @@ const vercettiFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Rafael Ortiz Larios ✌️",
+  title: "Rafael Ortiz Larios",
   description: "Philosopher",
   keywords: "Rafael Ortiz Larios",
   authors: [{ name: "Rafael Ortiz Larios" }],
@@ -34,6 +34,11 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/favicon-16x16.png',
+    apple: '/icon.png',
   },
   openGraph: {
     title: "Rafael Ortiz Larios ",
