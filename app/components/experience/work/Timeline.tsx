@@ -78,7 +78,15 @@ const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number
 const Timeline = ({ progress }: { progress: number }) => {
   const { camera } = useThree();
   const isActive = usePortalStore((state) => state.activePortalId === 'work');
-  const timeline = useMemo(() => WORK_TIMELINE, []);
+  const timeline = useMemo(() => {
+    if (isMobile) {
+      return WORK_TIMELINE.map((p) => ({
+        ...p,
+        point: new THREE.Vector3(p.point.x * 0.3, p.point.y, p.point.z),
+      }));
+    }
+    return WORK_TIMELINE;
+  }, []);
 
   const curve = useMemo(() => new THREE.CatmullRomCurve3(timeline.map(p => p.point), false), [timeline]);
   const curvePoints = useMemo(() => curve.getPoints(500), [curve]);

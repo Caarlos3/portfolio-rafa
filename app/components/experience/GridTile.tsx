@@ -169,8 +169,8 @@ const GridTile = (props: GridTileProps) => {
 
     const isWork = id === 'work';
     const points = isWork ?
-      [[-1, 2, 0], [-1, -2, 0], [3, -2, 0]] :
-      [[-3, 2, 0], [1, -2, 0], [1, 2, 0]];
+      [[-1, 2, 0], [-1, -2, 0], [2, -2, 0]] :
+      [[-2, 2, 0], [1, -2, 0], [1, 2, 0]];
 
     return <primitive object={TriangleGeometry({ points })} attach="geometry" />
   };
